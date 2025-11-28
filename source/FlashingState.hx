@@ -15,7 +15,6 @@ class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
-	var warnTextMobile:FlxText;
 	var warnText:FlxText;
 	
 	override function create()
@@ -25,16 +24,14 @@ class FlashingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		#if mobile
-		warnTextMobile = new FlxText(0, 0, FlxG.width, "Hey, watch out!\n
+		warnText = new FlxText(0, 0, FlxG.width, "Hey, watch out!\n
 		This Mod contains some flashing lights!\n
 		Press A to disable them now or go to Options Menu.\n
 		Press B to ignore this message.\n
 		You've been warned!", 32);
-		warnTextMobile.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
-		warnTextMobile.screenCenter(Y);
-		add(warnTextMobile);
-		#end
+		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+		warnTex.screenCenter(Y);
+		add(warnText);
 
 		#if mobile
 		addTouchPad("NONE", "A_B");
