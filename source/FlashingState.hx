@@ -15,8 +15,11 @@ class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
+	#if mobile
 	var warnTextMobile:FlxText;
+	#else
 	var warnText:FlxText;
+	#end
 	
 	override function create()
 	{
@@ -58,6 +61,26 @@ class FlashingState extends MusicBeatState
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
+
+				#if mobile
+				if(!back) {
+					ClientPrefs.flashing = false;
+					ClientPrefs.saveSettings();
+					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxFlicker.flicker(warnTextMobile, 1, 0.1, false, true, function(flk:FlxFlicker) {
+						new FlxTimer().start(0.5, function (tmr:FlxTimer) {
+							MusicBeatState.switchState(new TitleState());
+						});
+					});
+				} else {
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+					FlxTween.tween(warnTextMobile, {alpha: 0}, 1, {
+						onComplete: function (twn:FlxTween) {
+							MusicBeatState.switchState(new TitleState());
+						}
+					});
+				}
+				#else
 				if(!back) {
 					ClientPrefs.flashing = false;
 					ClientPrefs.saveSettings();
@@ -75,6 +98,7 @@ class FlashingState extends MusicBeatState
 						}
 					});
 				}
+				#end
 			}
 		}
 		super.update(elapsed);
