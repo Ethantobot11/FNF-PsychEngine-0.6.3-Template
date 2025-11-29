@@ -112,7 +112,7 @@ class ControlsSubState extends MusicBeatSubstate {
 		changeSelection();
 
 		#if mobile
-		addTouchPad("LEFT_FULL", "A_B");
+		addTouchPad("LEFT_FULL", "B");
 		#end
 	}
 
