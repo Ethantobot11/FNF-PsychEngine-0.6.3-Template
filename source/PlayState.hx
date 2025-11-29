@@ -337,7 +337,9 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	#if mobile
 	public var luaTouchPad:TouchPad;
+	#end
 
 	override public function create()
 	{
