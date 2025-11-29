@@ -3081,10 +3081,12 @@ class PlayState extends MusicBeatState
 		}
 
 		if (
+			#if mobile
 			#if android
 			FlxG.android.justReleased.BACK
 			#else
 			touchPad.buttonP.justPressed
+			#end
 			#end
 			|| controls.PAUSE && startedCountdown && canPause)
 		{
