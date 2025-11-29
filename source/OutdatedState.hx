@@ -15,8 +15,11 @@ class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
+	#if mobile
 	var warnTextMobile:FlxText;
+	#else
 	var warnText:FlxText;
+	#end
 	
 	override function create()
 	{
